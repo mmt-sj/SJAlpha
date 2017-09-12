@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>@ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/weui/dist/lib/weui.css" />
+        <link rel="stylesheet" href="~/lib/weui/dist/css/jquery-weui.css" />
+        <link rel="stylesheet" href="~/css/default.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css"
+              asp-fallback-href="~/lib/weui/dist/lib/weui.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css"
+              asp-fallback-href="~/lib/weui/dist/css/jquery-weui.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    @RenderBody()
+    <environment include="Development">
+        <script src="~/lib/weui/dist/lib/jquery-2.1.4.js"></script>
+        <script src="~/lib/weui/dist/js/jquery-weui.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"
+                asp-fallback-src="~/lib/weui/dist/lib/jquery-2.1.4.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"
+                asp-fallback-src="~/lib/weui/dist/js/jquery-weui.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>
