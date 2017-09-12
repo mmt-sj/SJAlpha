@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MT.SJAlpha.Web", "MT.SJAlph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MT.SJAlpha.EFCoreCodeFirst", "MT.SJAlpha.EFCoreCodeFirst\MT.SJAlpha.EFCoreCodeFirst.csproj", "{B0C8D7F0-8D20-4BA2-B13B-37C24A4B645F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.SJAlpha.Admin", "MT.SJAlpha.Admin\MT.SJAlpha.Admin.csproj", "{3C78AE1A-0BCD-409D-A323-52F39E22F97D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MT.SJAlpha.Admin", "MT.SJAlpha.Admin\MT.SJAlpha.Admin.csproj", "{3C78AE1A-0BCD-409D-A323-52F39E22F97D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
