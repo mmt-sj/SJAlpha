@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "欢迎加入阿花工作室";
+    var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
+}
+<form action="/recruit/index" method="post">
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">学号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" name="account" type="number" pattern="[0-11]*" placeholder="请输入学号">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" name="name" type="text" placeholder="请输入姓名">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">选择性别</div>
+    <div class="weui-cells weui-cells_radio">
+        <label class="weui-cell weui-check__label" for="r1">
+            <div class="weui-cell__bd">
+                <p>男</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" value="男" name="Sex" id="r1">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="r2">
+            <div class="weui-cell__bd">
+                <p>女</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" value="女" name="Sex" class="weui-check" id="r2" checked="checked">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">手机号</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" name="phoneNumber" type="tel" placeholder="请输入手机号">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">选择院系</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell ">
+            <div class="weui-cell__bd">
+                <select name="departmentId" class="weui-input">
+                    @foreach (var item in departmentDic)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">加入理由</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea name="remark" class="weui-textarea" placeholder="有什么想说的都可以写在这里" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span>0</span>/200</div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="weui-btn weui-btn_primary">提交</button>
+</form>
+
