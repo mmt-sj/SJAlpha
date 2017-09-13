@@ -11,7 +11,7 @@ namespace MT.SJAlpha.EFCoreCodeFirst
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(
-                "server=localhost;database=sj_alpha;user=root;password=123456;");
+                "server=127.0.0.1;database=sj_alpha;user=root;password=123456;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
