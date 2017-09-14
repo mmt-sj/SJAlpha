@@ -12,16 +12,18 @@ namespace MT.SJAlpha.Web.Controllers
         {
             return View();
         }
-        public IActionResult Success(string message="操作成功！",string url="")
+        public IActionResult Success(string message="",string url1="",string url2="")
         {
             ViewData["message"] = message;
-            ViewData["url"] = url;
+            ViewData["url1"] = url1;
+            ViewData["url2"] = url2;
             return View();
         }
-        public IActionResult Faild(string message="操作失败", string url = "")
+        public IActionResult Faild(string message="", string url1 = "",string url2="")
         {
             ViewData["message"] = message;
-            ViewData["url"] = url;
+            ViewData["url1"] = url1;
+            ViewData["url2"] = url2;
             return View();
         }
     }
