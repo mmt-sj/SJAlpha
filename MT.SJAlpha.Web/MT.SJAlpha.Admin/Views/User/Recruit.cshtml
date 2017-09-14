@@ -11,6 +11,7 @@
             <th>学号</th>
             <th>姓名</th>
             <th>性别</th>
+            <th>电话</th>
             <th>院系</th>
             <th>时间</th>
             <th>加入理由</th>
@@ -24,6 +25,7 @@
             <td>@item.Account</td>
             <td>@item.Name</td>
             <td>@item.Sex</td>
+            <td>@item.PhoneNumber</td>
             <td>@Html.Raw(departmentDic.GetValueOrDefault(item.DepartmentId))</td>
             <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
             <td>@item.Remark</td>
