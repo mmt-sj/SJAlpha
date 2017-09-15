@@ -53,5 +53,13 @@ namespace MT.SJAlpha.EFCoreCodeFirst.Repository
 
             return _dbContext.User.FirstOrDefault(a => a.Account == account);
         }
+        /// <summary>
+        /// 获得申请加入的列表
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<User> GetApplyAccount()
+        {
+            return _dbContext.User.Where(a => a.Type.Equals("new"));
+        }
     }
 }
