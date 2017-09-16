@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MT.SJAlpha.EFCoreCodeFirst\MT.SJAlpha.EFCoreCodeFirst.csproj" />
+    <ProjectReference Include="..\SDK\api_sdk\aliyun-net-sdk-core\aliyun-net-sdk-core.csproj" />
+    <ProjectReference Include="..\SDK\api_sdk\aliyun-net-sdk-dysmsapi\aliyun-net-sdk-dysmsapi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

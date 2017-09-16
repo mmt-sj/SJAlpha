@@ -15,7 +15,7 @@ namespace MT.Core.Common
         }
         public static string Error(string message = "请求失败")
         {
-            var json = new { status = 1, message = message };
+            var json = new { status = 0, message = message };
             var str = JsonConvert.SerializeObject(json);
             return str;
         }
