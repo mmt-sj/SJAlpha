@@ -21,5 +21,9 @@ namespace MT.SJAlpha.Admin.Controllers
             ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
             return View(newUserList);
         }
+        public IActionResult Navigation()
+        {
+            return View();
+        }
     }
 }

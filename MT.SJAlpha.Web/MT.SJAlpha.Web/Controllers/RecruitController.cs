@@ -31,5 +31,6 @@ namespace MT.SJAlpha.Web.Controllers
             userRepository.Edit(user);
             return RedirectToAction("success","public",new {message="信息提交成功!请耐心等待答复"});
         }
+    
     }
 }
