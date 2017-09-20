@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MT.SJAlpha.EFCoreCodeFirst.Repository;
+using MT.SJAlpha.Admin.Common;
 
 namespace MT.SJAlpha.Admin.Controllers
 {
@@ -24,6 +25,26 @@ namespace MT.SJAlpha.Admin.Controllers
         public IActionResult Navigation()
         {
             return View();
+        }
+        public IActionResult ShenHe(string type="new")
+        {
+            ViewData["auditedCount"] = userRepository.Queryable.Count(a=>a.Type==AccountHelper.UserStatus.Audited);
+            ViewData["newCount"] = userRepository.Queryable.Count(a=>a.Type==AccountHelper.UserStatus.New);
+            var UserList = userRepository.Queryable;
+            ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
+            if (type != "")
+                UserList = UserList.Where(a => a.Type == type);
+            return View(UserList.ToList());
+        }
+        [HttpPost]
+        public IActionResult ShenHe( int id) {
+            var User = userRepository.GetFirstOrDefaultById(id);
+            if (User != null)
+            {
+                User.Type = AccountHelper.UserStatus.Audited;
+                userRepository.Edit(User);
+            }
+            return Redirect("/User/ShenHe");
         }
     }
 }

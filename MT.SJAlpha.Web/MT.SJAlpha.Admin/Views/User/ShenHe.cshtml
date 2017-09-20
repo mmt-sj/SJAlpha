@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "审核";
+    var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
+}
+@model List<MT.SJAlpha.EFCoreCodeFirst.Entitis.User>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">未审核（@ViewData["newCount"]）</a></li>
+    <li role="presentation"><a href="#">已审核(@ViewData["auditedCount"])</a></li>
+</ul>
+<table class="table table-bordered table-responsive table-responsive" style="margin-top:10px;">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>院系</th>
+            <th>时间</th>
+            <th>加入理由</th>
+            <th>审核</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Account</td>
+                <td>@item.Name</td>
+                <td>@item.Sex</td>
+                <td>@item.PhoneNumber</td>
+                <td>@Html.Raw(departmentDic.GetValueOrDefault(item.DepartmentId))</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd")</td>
+                <td style="font-size:10px;max-width:420px;">@item.Remark</td>
+                <td>
+                <form action="/User/ShenHe"method="post" >
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="btn btn-primary">审核</button>
+                </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $().ready(function () {
+            $("#download").click(function () {
+                var iframe = '<iframe class="hidden" src="/Excel/GetApplyAccountInfoExcel"></iframe>'
+                $("#iframe").append(iframe);
+                setTimeout(function () { $("#iframe").html(""); }, 1000);
+            });
+        });
+    </script>
+}
+
