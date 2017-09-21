@@ -26,14 +26,12 @@ namespace MT.SJAlpha.Admin.Controllers
         {
             return View();
         }
-        public IActionResult ShenHe(string type="new")
+        public IActionResult ShenHe()
         {
             ViewData["auditedCount"] = userRepository.Queryable.Count(a=>a.Type==AccountHelper.UserStatus.Audited);
             ViewData["newCount"] = userRepository.Queryable.Count(a=>a.Type==AccountHelper.UserStatus.New);
             var UserList = userRepository.Queryable;
             ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
-            if (type != "")
-                UserList = UserList.Where(a => a.Type == type);
             return View(UserList.ToList());
         }
         [HttpPost]
