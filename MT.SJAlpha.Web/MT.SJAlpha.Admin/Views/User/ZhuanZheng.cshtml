@@ -1,17 +1,17 @@
 ﻿@model List<MT.SJAlpha.EFCoreCodeFirst.Entitis.User>
 @{
-    ViewData["Title"] = "审核";
+    ViewData["Title"] = "转正设置";
     var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
     var type = (string)ViewData["type"];
 }
 
 <input type="hidden" id="type" value="@type" />
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a data-toggle="tab" href="#new">待审核（@ViewData["newCount"]）</a></li>
-    <li role="presentation"><a data-toggle="tab" href="#audited">已审核(@ViewData["auditedCount"])</a></li>
+    <li role="presentation" class="active"><a data-toggle="tab" href="#audited">待转正（@ViewData["auditedCount"]）</a></li>
+    <li role="presentation"><a data-toggle="tab" href="#now">已转正(@ViewData["nowCount"])</a></li>
 </ul>
 <div class="tab-content">
-    <div class="tab-pane fade in active" id="new">
+    <div class="tab-pane fade in active" id="audited">
         <table class="table table-bordered table-responsive table-responsive" style="margin-top:10px;">
             <thead>
                 <tr>
@@ -23,46 +23,7 @@
                     <th>院系</th>
                     <th>时间</th>
                     <th>加入理由</th>
-                    <th>审核</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Where(a => a.Type == "new"))
-                {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Account</td>
-                        <td>@item.Name</td>
-                        <td>@item.Sex</td>
-                        <td>@item.PhoneNumber</td>
-                        <td>@Html.Raw(departmentDic.GetValueOrDefault(item.DepartmentId))</td>
-                        <td>@item.CreateTime.ToString("yyyy-MM-dd")</td>
-                        <td style="font-size:10px;max-width:420px;">@item.Remark</td>
-                        <td>
-                            <form action="/User/ShenHe" method="post">
-                                <input type="hidden" name="type" value="@type" />
-                                <input type="hidden" name="id" value="@item.Id" />
-                                <button type="submit" class="btn btn-xs btn-success">审核通过</button>
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="tab-pane fade" id="audited">
-        <table class="table table-bordered table-responsive table-responsive" style="margin-top:10px;">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>学号</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>电话</th>
-                    <th>院系</th>
-                    <th>时间</th>
-                    <th>加入理由</th>
-                    <th>操作</th>
+                    <th>转正</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,10 +39,49 @@
                         <td>@item.CreateTime.ToString("yyyy-MM-dd")</td>
                         <td style="font-size:10px;max-width:420px;">@item.Remark</td>
                         <td>
-                            <form action="/User/ShenHeCancel" method="post">
+                            <form action="/User/ZhuanZheng" method="post">
                                 <input type="hidden" name="type" value="@type" />
                                 <input type="hidden" name="id" value="@item.Id" />
-                                <button type="submit" class="btn btn-xs btn-danger">取消审核</button>
+                                <button type="submit" class="btn btn-xs btn-success">转正</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="now">
+        <table class="table table-bordered table-responsive table-responsive" style="margin-top:10px;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>电话</th>
+                    <th>院系</th>
+                    <th>时间</th>
+                    <th>加入理由</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Where(a => a.Type == "now"))
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Account</td>
+                        <td>@item.Name</td>
+                        <td>@item.Sex</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@Html.Raw(departmentDic.GetValueOrDefault(item.DepartmentId))</td>
+                        <td>@item.CreateTime.ToString("yyyy-MM-dd")</td>
+                        <td style="font-size:10px;max-width:420px;">@item.Remark</td>
+                        <td>
+                            <form action="/User/ZhuanZhengCancel" method="post">
+                                <input type="hidden" name="type" value="@type" />
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-xs btn-danger">取消转正</button>
                             </form>
                         </td>
                     </tr>
@@ -90,7 +90,6 @@
         </table>
     </div>
 </div>
-
 @section Scripts{
     <script>
         $().ready(function () {
@@ -105,3 +104,5 @@
     </script>
 
 }
+
+

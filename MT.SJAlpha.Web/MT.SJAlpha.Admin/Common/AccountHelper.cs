@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace MT.SJAlpha.Admin.Common
-{   
+{
 
     public class AccountHelper
     {
-        public  struct UserStatus {
+        public struct UserStatus
+        {
             /// <summary>
             /// 申请加入
             /// </summary>
@@ -16,7 +17,7 @@ namespace MT.SJAlpha.Admin.Common
             /// <summary>
             /// 审核通过
             /// </summary>
-            public static string Audited { get {return "audited"; } }
+            public static string Audited { get { return "audited"; } }
             /// <summary>
             /// 审核未通过
             /// </summary>
@@ -51,21 +52,29 @@ namespace MT.SJAlpha.Admin.Common
             /// <summary>
             /// 副秘书
             /// </summary>
-            public string FuMiShu { get { return "Fumishu"; } }
+            public string FuMiShu { get { return "fumishu"; } }
             /// <summary>
             /// 组长
             /// </summary>
-            public string ZuZhang { get { return "ZuZhang"; } }
+            public string ZuZhang { get { return "zuzhang"; } }
             /// <summary>
             /// 组员
             /// </summary>
             public string ZuYuan { get { return "zuyuan"; } }
         }
-        public static string GetNianJiForAccount(string account) {
-            if (account.Length == 11) {
-                return account.Substring(3,2);
+        public static string GetNianJiForAccount(string account)
+        {
+            if (account.Length == 11)
+            {
+                return account.Substring(3, 2);
             }
-            else { return "未知"; }  
+            else { return "未知"; }
+        }
+        public static Dictionary<string, string> GetZhiWuDic()
+        {
+            return new Dictionary<string, string>() {
+                 {"buzhang","部长" }, { "fubuzhang","副部长"},{ "mishu","秘书"}, { "fumishu","副秘书"},{ "zuzhang","组长"},{ "zuyuan","组员"},
+            };
         }
     }
 }

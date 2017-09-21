@@ -14,7 +14,10 @@ namespace MT.SJAlpha.Admin.Controllers
         private readonly DepartmentRepository departmentRepository = new DepartmentRepository();
         public IActionResult Index()
         {
-            return View();
+            var userList = userRepository.Queryable.Where(a => a.Type ==AccountHelper.UserStatus.Now).ToList();
+            ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
+            ViewData["zhiwuDic"] = AccountHelper.GetZhiWuDic();
+            return View(userList);
         }
         public IActionResult Recruit()
         {
@@ -26,8 +29,9 @@ namespace MT.SJAlpha.Admin.Controllers
         {
             return View();
         }
-        public IActionResult ShenHe()
+        public IActionResult ShenHe(string type="new")
         {
+            ViewData["type"] = type;
             ViewData["auditedCount"] = userRepository.Queryable.Count(a=>a.Type==AccountHelper.UserStatus.Audited);
             ViewData["newCount"] = userRepository.Queryable.Count(a=>a.Type==AccountHelper.UserStatus.New);
             var UserList = userRepository.Queryable;
@@ -35,14 +39,56 @@ namespace MT.SJAlpha.Admin.Controllers
             return View(UserList.ToList());
         }
         [HttpPost]
-        public IActionResult ShenHe( int id) {
+        public IActionResult ShenHe( int id,string type) {
             var User = userRepository.GetFirstOrDefaultById(id);
             if (User != null)
             {
                 User.Type = AccountHelper.UserStatus.Audited;
                 userRepository.Edit(User);
             }
-            return Redirect("/User/ShenHe");
+            return Redirect("/User/ShenHe?type="+type);
+        }
+        [HttpPost]
+        public IActionResult ShenHeCancel(int id, string type)
+        {
+            var User = userRepository.GetFirstOrDefaultById(id);
+            if (User != null)
+            {
+                User.Type = AccountHelper.UserStatus.New;
+                userRepository.Edit(User);
+            }
+            return Redirect("/User/ShenHe?type="+type);
+        }
+        public IActionResult ZhuanZheng(string type= "audited")
+        {
+            ViewData["type"] = type;
+            ViewData["auditedCount"] = userRepository.Queryable.Count(a => a.Type == AccountHelper.UserStatus.Audited);
+            ViewData["nowCount"] = userRepository.Queryable.Count(a => a.Type == AccountHelper.UserStatus.Now);
+            var UserList = userRepository.Queryable;
+            ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
+            return View(UserList.ToList());
+        }
+
+        [HttpPost]
+        public IActionResult ZhuanZheng(int id,string type)
+        {
+            var User = userRepository.GetFirstOrDefaultById(id);
+            if (User != null)
+            {
+                User.Type = AccountHelper.UserStatus.Now;
+                userRepository.Edit(User);
+            }
+            return Redirect("/User/ZhuanZheng?type=" + type);
+        }
+        [HttpPost]
+        public IActionResult ZhuanZhengCancel(int id,string type) {
+            var User = userRepository.GetFirstOrDefaultById(id);
+            if (User != null)
+            {
+                User.Type = AccountHelper.UserStatus.Audited;
+                userRepository.Edit(User);
+            }
+            return Redirect("/User/ZhuanZheng?type=" + type);
         }
     }
 }
