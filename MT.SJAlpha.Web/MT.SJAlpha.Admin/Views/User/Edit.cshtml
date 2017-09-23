@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
+    var zhiwuDic = (Dictionary<string, string>)ViewData["zhiwuDic"];
+    var checkedNan = Model.Sex == "男" ? "checked" : "";
+    var checkedNv = Model.Sex == "女" ? "checked" : "";
+    var checkedZaiZhi = Model.Type == "now" ? "checked" : "";
+    var checkedBiye = Model.Type == "old" ? "checked" : "";
+}
+@model MT.SJAlpha.EFCoreCodeFirst.Entitis.User
+<form class="form-horizontal" action="/User/Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="form-group">
+        <label class="col-sm-2 control-label">姓名</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="Name" value="@Model.Name" placeholder="姓名">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="form-inline">
+                <div class="radio">
+                    <label>
+                        <input name="Sex" value="男" @checkedNan type="radio"> 男
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="Sex" value="女" @checkedNv type="radio"> 女
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">学号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="Account" value="@Model.Account" placeholder="学号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">手机号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" placeholder="手机号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">院系</label>
+        <div class="col-sm-6">
+            <select class="form-control" name="DepartmentId">
+                @foreach (var dic in departmentDic)
+                {
+                    if (Model.DepartmentId == dic.Key)
+                    {
+                        <option selected value="@dic.Key">@dic.Value</option>
+                    }
+                    else
+                    {
+                        <option value="@dic.Key">@dic.Value</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">职务</label>
+        <div class="col-sm-6">
+            <select class="form-control" name="Position">
+                @foreach (var dic in zhiwuDic)
+                {
+                    if (Model.Position == dic.Key)
+                    {
+                        <option selected value="@dic.Key">@dic.Value</option>
+                    }
+                    else
+                    {
+                        <option value="@dic.Key">@dic.Value</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="form-inline">
+                <div class="radio">
+                    <label>
+                        <input name="Type" @checkedZaiZhi value="now" @checkedNan type="radio"> 在职
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="Type" @checkedBiye value="old" @checkedNv type="radio"> 毕业
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </div>
+</form>

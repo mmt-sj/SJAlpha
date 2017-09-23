@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MT.SJAlpha.EFCoreCodeFirst.Repository;
 using MT.SJAlpha.Admin.Common;
+using MT.SJAlpha.EFCoreCodeFirst.Entitis;
 
 namespace MT.SJAlpha.Admin.Controllers
 {
@@ -76,6 +77,7 @@ namespace MT.SJAlpha.Admin.Controllers
             if (User != null)
             {
                 User.Type = AccountHelper.UserStatus.Now;
+                User.Position = AccountHelper.UserPosition.ZuYuan;
                 userRepository.Edit(User);
             }
             return Redirect("/User/ZhuanZheng?type=" + type);
@@ -86,9 +88,44 @@ namespace MT.SJAlpha.Admin.Controllers
             if (User != null)
             {
                 User.Type = AccountHelper.UserStatus.Audited;
+                User.Position = "";
                 userRepository.Edit(User);
             }
             return Redirect("/User/ZhuanZheng?type=" + type);
+        }
+
+        public IActionResult Edit(int id=0)
+        {
+            ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
+            ViewData["zhiwuDic"] = AccountHelper.GetZhiWuDic();
+            var user = userRepository.GetFirstOrDefaultById(id);
+            if (user == null)
+                return View(new User());
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult Edit(User model)
+        {
+            if (model.Id != 0)
+            {
+                var user = userRepository.GetFirstOrDefaultById(model.Id);
+                if (user != null) {
+                    user.Name = model.Name;
+                    user.Sex = model.Sex;
+                    user.Account = model.Account;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.DepartmentId = model.DepartmentId;
+                    user.Position = model.Position;
+                    userRepository.Edit(user);
+                }
+            }
+            else {
+                model.CreateTime = DateTime.Now;
+                model.Remark = "管理员手动添加";
+                model.Password = "123456";
+                userRepository.Edit(model);
+            }
+            return Redirect("/User/Index");
         }
     }
 }

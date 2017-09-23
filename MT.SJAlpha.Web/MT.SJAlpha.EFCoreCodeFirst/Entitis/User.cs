@@ -28,6 +28,8 @@ namespace MT.SJAlpha.EFCoreCodeFirst.Entitis
         [MaxLength(1024)]
         public string Remark { get; set; }
         public DateTime CreateTime { get; set; }
+        [MaxLength(32), Required]
+        public string Position { get; set; }
 
     }
 }

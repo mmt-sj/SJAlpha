@@ -26,11 +26,11 @@
             <td>@item.Name</td>
             <td>@item.Sex</td>
             <td>@item.Account</td>
-            <td> @Html.Raw(item.Account.Length < 11 ? "未知" : item.Account.Substring(3, 2) + "级")</td>
+            <td>@Html.Raw(item.Account.Length < 11 ? "未知" : item.Account.Substring(3, 2) + "级")</td>
             <td>@departmentDic.FirstOrDefault(a=>a.Key==item.DepartmentId).Value</td>
             <td>@item.PhoneNumber</td>
-            <td>@zhiwuDic.FirstOrDefault(a=>a.Key==item.Type).Value</td>
-            <th><a href="#" class="btn btn-xs btn-primary">编辑</a></th>
+            <td>@zhiwuDic.FirstOrDefault(a=>a.Key==item.Position).Value</td>
+            <th><a href="/User/Edit?id=@item.Id" class="btn btn-xs btn-primary">编辑</a></th>
         </tr>
        }
     </tbody>

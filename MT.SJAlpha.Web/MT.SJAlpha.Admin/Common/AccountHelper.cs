@@ -8,6 +8,33 @@ namespace MT.SJAlpha.Admin.Common
 
     public class AccountHelper
     {
+        public struct UserPosition
+        {
+            /// <summary>
+            /// 部长
+            /// </summary>
+            public static string BuZhang { get { return "buzhang"; } }
+            /// <summary>
+            /// 副部长
+            /// </summary>
+            public static string FuBuZhang { get { return "fubuzhang"; } }
+            /// <summary>
+            /// 秘书
+            /// </summary>
+            public static string MiShu { get { return "mishu"; } }
+            /// <summary>
+            /// 副秘书
+            /// </summary>
+            public string FuMiShu { get { return "fumishu"; } }
+            /// <summary>
+            /// 组长
+            /// </summary>
+            public static string ZuZhang { get { return "zuzhang"; } }
+            /// <summary>
+            /// 组员
+            /// </summary>
+            public static string ZuYuan { get { return "zuyuan"; } }
+        }
         public struct UserStatus
         {
             /// <summary>
@@ -35,33 +62,7 @@ namespace MT.SJAlpha.Admin.Common
             /// </summary>
             public static string Delete { get { return "delete"; } }
         }
-        public struct UserType
-        {
-            /// <summary>
-            /// 部长
-            /// </summary>
-            public string BuZhang { get { return "buzhang"; } }
-            /// <summary>
-            /// 副部长
-            /// </summary>
-            public string FuBuZhang { get { return "fubuzhang"; } }
-            /// <summary>
-            /// 秘书
-            /// </summary>
-            public string MiShu { get { return "mishu"; } }
-            /// <summary>
-            /// 副秘书
-            /// </summary>
-            public string FuMiShu { get { return "fumishu"; } }
-            /// <summary>
-            /// 组长
-            /// </summary>
-            public string ZuZhang { get { return "zuzhang"; } }
-            /// <summary>
-            /// 组员
-            /// </summary>
-            public string ZuYuan { get { return "zuyuan"; } }
-        }
+       
         public static string GetNianJiForAccount(string account)
         {
             if (account.Length == 11)
@@ -70,10 +71,17 @@ namespace MT.SJAlpha.Admin.Common
             }
             else { return "未知"; }
         }
+
         public static Dictionary<string, string> GetZhiWuDic()
         {
             return new Dictionary<string, string>() {
-                 {"buzhang","部长" }, { "fubuzhang","副部长"},{ "mishu","秘书"}, { "fumishu","副秘书"},{ "zuzhang","组长"},{ "zuyuan","组员"},
+                 {"buzhang","部长" }, { "fubuzhang","副部长"},{ "mishu","秘书"}, { "fumishu","副秘书"},{ "zuzhang","组长"},{ "zuyuan","组员"},{"","新人" }
+            };
+        }
+        public static Dictionary<string, string> GetUserStatusDic()
+        {
+            return new Dictionary<string, string>() {
+                 {"now","在职" }, { "old","毕业"}
             };
         }
     }
