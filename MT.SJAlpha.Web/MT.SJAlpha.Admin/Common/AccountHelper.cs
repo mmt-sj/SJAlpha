@@ -81,7 +81,7 @@ namespace MT.SJAlpha.Admin.Common
         public static Dictionary<string, string> GetUserStatusDic()
         {
             return new Dictionary<string, string>() {
-                 {"now","在职" }, { "old","毕业"}
+                 {"now","在职" }, { "old","毕业"},{"delete","解雇" }
             };
         }
     }

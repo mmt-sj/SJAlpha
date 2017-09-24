@@ -69,7 +69,6 @@ namespace MT.SJAlpha.Admin.Controllers
             ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
             return View(UserList.ToList());
         }
-
         [HttpPost]
         public IActionResult ZhuanZheng(int id,string type)
         {
@@ -93,7 +92,6 @@ namespace MT.SJAlpha.Admin.Controllers
             }
             return Redirect("/User/ZhuanZheng?type=" + type);
         }
-
         public IActionResult Edit(int id=0)
         {
             ViewData["departmentDic"] = departmentRepository.GetDepartmentDictionary();
@@ -116,6 +114,7 @@ namespace MT.SJAlpha.Admin.Controllers
                     user.PhoneNumber = model.PhoneNumber;
                     user.DepartmentId = model.DepartmentId;
                     user.Position = model.Position;
+                    user.Type = model.Type;
                     userRepository.Edit(user);
                 }
             }

@@ -1,37 +1,44 @@
 ﻿@model List<MT.SJAlpha.EFCoreCodeFirst.Entitis.User>
 @{
     ViewData["Title"] = "Index";
-    var departmentDic = (Dictionary < int, string >)ViewData["departmentDic"];
+    var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
     var zhiwuDic = (Dictionary<string, string>)ViewData["zhiwuDic"];
 }
-<table class="table table-bordered table-responsive table-responsive" >
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>学号</th>
-            <th>年级</th>
-            <th>院系</th>
-            <th>电话</th>
-            <th>职务</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-       @foreach (var item in Model)
-       {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td>@item.Sex</td>
-            <td>@item.Account</td>
-            <td>@Html.Raw(item.Account.Length < 11 ? "未知" : item.Account.Substring(3, 2) + "级")</td>
-            <td>@departmentDic.FirstOrDefault(a=>a.Key==item.DepartmentId).Value</td>
-            <td>@item.PhoneNumber</td>
-            <td>@zhiwuDic.FirstOrDefault(a=>a.Key==item.Position).Value</td>
-            <th><a href="/User/Edit?id=@item.Id" class="btn btn-xs btn-primary">编辑</a></th>
-        </tr>
-       }
-    </tbody>
-</table>
+<!-- Split button -->
+<div class="btn-group">
+    <a href="/User/Edit" class="btn btn-info">新增</a>
+</div>
+<div class="table-responsive" style="margin-top:10px;">
+    <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年级</th>
+                <th>院系</th>
+                <th>电话</th>
+                <th>职务</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Account</td>
+                    <td>@item.Name</td>
+                    <td>@item.Sex</td>
+                    <td>@Html.Raw(item.Account.Length < 11 ? "未知" : item.Account.Substring(3, 2) + "级")</td>
+                    <td>@departmentDic.FirstOrDefault(a => a.Key == item.DepartmentId).Value</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@zhiwuDic.FirstOrDefault(a => a.Key == item.Position).Value</td>
+                    <th><a href="/User/Edit?id=@item.Id" class="btn btn-xs btn-primary">编辑</a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

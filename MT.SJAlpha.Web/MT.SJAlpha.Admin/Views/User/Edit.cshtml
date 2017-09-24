@@ -3,10 +3,9 @@
     ViewData["Title"] = "Edit";
     var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
     var zhiwuDic = (Dictionary<string, string>)ViewData["zhiwuDic"];
-    var checkedNan = Model.Sex == "男" ? "checked" : "";
     var checkedNv = Model.Sex == "女" ? "checked" : "";
-    var checkedZaiZhi = Model.Type == "now" ? "checked" : "";
     var checkedBiye = Model.Type == "old" ? "checked" : "";
+    var checkedJieGu = Model.Type == "delete" ? "checked" : "";
 }
 @model MT.SJAlpha.EFCoreCodeFirst.Entitis.User
 <form class="form-horizontal" action="/User/Edit" method="post">
@@ -14,7 +13,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">姓名</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Name" value="@Model.Name" placeholder="姓名">
+            <input type="text" class="form-control" name="Name" value="@Model.Name" placeholder="姓名" required >
         </div>
     </div>
     <div class="form-group">
@@ -22,7 +21,7 @@
             <div class="form-inline">
                 <div class="radio">
                     <label>
-                        <input name="Sex" value="男" @checkedNan type="radio"> 男
+                        <input name="Sex" value="男" checked type="radio"> 男
                     </label>
                 </div>
                 <div class="radio">
@@ -36,13 +35,13 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">学号</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Account" value="@Model.Account" placeholder="学号">
+            <input type="text" class="form-control" name="Account" value="@Model.Account" placeholder="学号" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">手机号</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" placeholder="手机号">
+            <input type="text" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" placeholder="手机号" required>
         </div>
     </div>
     <div class="form-group">
@@ -87,12 +86,17 @@
             <div class="form-inline">
                 <div class="radio">
                     <label>
-                        <input name="Type" @checkedZaiZhi value="now" @checkedNan type="radio"> 在职
+                        <input name="Type" checked value="now"  type="radio"> 在职
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input name="Type" @checkedBiye value="old" @checkedNv type="radio"> 毕业
+                        <input name="Type" @checkedBiye value="old"  type="radio"> 毕业
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="Type" @checkedJieGu value="delete" type="radio"> 解雇
                     </label>
                 </div>
             </div>
