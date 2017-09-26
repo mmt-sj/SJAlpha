@@ -4,13 +4,18 @@
     var departmentDic = (Dictionary<int, string>)ViewData["departmentDic"];
     var type = (string)ViewData["type"];
 }
-
 <ol class="breadcrumb">
     <li><a href="/User/Recruit">申请列表</a></li>
     <li class="active">审核</li>
     <li><a href="/User/ZhuanZheng">转正</a></li>
 </ol>
 <input type="hidden" id="type" value="@type" />
+<div id="iframe"></div>
+<div class="row">
+    <div class="col-xs-2">
+        <button id="download" class="btn  btn-primary">导出excel</button>
+    </div>
+</div>
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a data-toggle="tab" href="#new">待审核（@ViewData["newCount"]）</a></li>
     <li role="presentation"><a data-toggle="tab" href="#audited">已审核(@ViewData["auditedCount"])</a></li>
@@ -107,6 +112,13 @@
                 // 获取已激活的标签页的名称
                 var activeTab = $(e.target).attr("href").replace('#', '');
                 $('input[name="type"]').val(activeTab);
+                $('#type').val(activeTab);
+            });
+            //下载
+            $("#download").click(function () {
+                var iframe = '<iframe class="hidden" src="/Excel/GetApplyAccountInfoExcel?type=' + $("#type").val() + '"></iframe>'
+                $("#iframe").append(iframe);
+                setTimeout(function () { $("#iframe").html(""); }, 1000);
             });
         });
     </script>

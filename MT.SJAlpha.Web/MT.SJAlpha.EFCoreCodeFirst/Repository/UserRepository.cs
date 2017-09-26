@@ -61,5 +61,9 @@ namespace MT.SJAlpha.EFCoreCodeFirst.Repository
         {
             return _dbContext.User.Where(a => a.Type.Equals("new"));
         }
+        public IQueryable<User> GetAccountForType(string type)
+        {
+            return _dbContext.User.Where(a => a.Type == type);
+        }
     }
 }

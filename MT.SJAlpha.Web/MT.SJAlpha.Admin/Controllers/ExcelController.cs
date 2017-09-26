@@ -9,6 +9,7 @@ using MT.SJAlpha.EFCoreCodeFirst.Repository;
 using MT.SJAlpha.Admin.Extends;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using MT.SJAlpha.Admin.Common;
 
 namespace MT.SJAlpha.Admin.Controllers
 {
@@ -20,7 +21,7 @@ namespace MT.SJAlpha.Admin.Controllers
         {
             return View();
         }
-        public ActionResult GetApplyAccountInfoExcel()
+        public ActionResult GetApplyAccountInfoExcel(string type)
         {
             HSSFWorkbook wk = new HSSFWorkbook();//创建工作簿
             ISheet sheet = wk.CreateSheet("sheet1");//创建一个sheet                     
@@ -35,7 +36,8 @@ namespace MT.SJAlpha.Admin.Controllers
             row.CreateCell(6).SetCellValue("申请时间");
             row.CreateCell(7).SetCellValue("申请理由");
             row.CreateCell(8).SetCellValue("备注");
-            var userList = userRepository.GetApplyAccount().ToList();
+            row.CreateCell(9).SetCellValue("状态");
+            var userList = userRepository.GetAccountForType(type).ToList();
             var departmentList = departmentRepository.GetDepartmentDictionary();
             for (var i= 0;i < userList.Count;i++) {
                 IRow rowTemp = sheet.CreateRow(i + 1);
@@ -48,6 +50,8 @@ namespace MT.SJAlpha.Admin.Controllers
                 rowTemp.CreateCell(6).SetCellValue(userList[i].CreateTime.ToFullChineseTime());
                 rowTemp.CreateCell(7).SetCellValue(userList[i].Remark);
                 rowTemp.CreateCell(8).SetCellValue("");
+                var typeStr = AccountHelper.GetUserStatusDic().FirstOrDefault(a => a.Key == userList[i].Type).Value;
+                rowTemp.CreateCell(9).SetCellValue(typeStr);
             }
             // 写入到客户端  
             MemoryStream ms = new System.IO.MemoryStream();

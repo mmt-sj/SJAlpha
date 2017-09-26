@@ -50,7 +50,7 @@
     <script>
         $().ready(function () {
             $("#download").click(function () {
-                var iframe = '<iframe class="hidden" src="/Excel/GetApplyAccountInfoExcel"></iframe>'
+                var iframe = '<iframe class="hidden" src="/Excel/GetApplyAccountInfoExcel?type=new"></iframe>'
                 $("#iframe").append(iframe);
                 setTimeout(function () { $("#iframe").html(""); }, 1000);
             });
